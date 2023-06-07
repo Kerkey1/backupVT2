@@ -1,28 +1,36 @@
 import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import Router from "./routes";
-import MainMenu from "./components/menu/MainMenu";
 import 'antd/dist/reset.css';
-import './styles/App.css';
-import MainWrapper from "./components/wrapper/MainWrapper";
-import {getAllData} from "./GlobalFunctions";
+import './App.css';
 import {useLocation} from "react-router";
+import Sidebar from "./components/layout/Sidebar";
+import MainContentWrapper from "./components/layout/MainContentWrapper";
+import {getSession} from "./utils";
+import machineStore from "./stores/MachineStore";
+import planStore from "./stores/PlansStore";
+import backupStore from "./stores/BackupStore";
+import notificationStore from "./stores/NotificationStore";
 
 const App = observer(() => {
     const location = useLocation();
 
     useEffect(() => {
-        getAllData()
+        const session = getSession();
+        if (session) {
+            machineStore.getAllMachines()
+            planStore.getAllPlans()
+            backupStore.getAllBackups()
+            notificationStore.getAllNotifications()
+        }
     }, [location?.pathname])
 
-    return <div className="main">
-        <div className="sider-wrapper">
-            <MainMenu/>
-        </div>
-        <MainWrapper>
+    return <>
+        <Sidebar/>
+        <MainContentWrapper>
             <Router/>
-        </MainWrapper>
-    </div>
+        </MainContentWrapper>
+    </>
 
 });
 export default App
