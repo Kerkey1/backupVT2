@@ -9,7 +9,7 @@ class FileStore extends AbstractStore {
     }
 
     @action updateMountPoint(object) {
-        return this.post(requests.updateMountPoint, object, UpdateEnum.Response, true, false)
+        return this.post(requests.updateMountPoint, UpdateEnum.Response, object)
     }
 }
 

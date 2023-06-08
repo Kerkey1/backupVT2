@@ -799,3 +799,10 @@ span.timeline-item-title {
     color: black!important;
     font-size: 18px;
 }
+
+.simple-wrapper{
+    width: calc(100% - 12px);
+    margin: 6px;
+    background-color: white;
+    border-radius: 6px;
+}

@@ -6,6 +6,7 @@ import ProtectedDevicesPage from "../pages/ProtectedDevicesPage";
 import PlansPage from "../pages/PlansPage";
 import WidgetsPage from "../pages/WidgetsPage";
 import DashboardPage from "../pages/DashboardPage";
+import SettingsPage from "../pages/SettingsPage";
 
 export const PagesData = [
     {
@@ -56,7 +57,7 @@ export const PagesData = [
                 title: "Настройки хоста",
                 path: "/settings",
                 hint: "На этой странице можно настроить точку монтирования",
-                element: <>Настройки хоста</>
+                element: <SettingsPage/>
             },
             {
                 title: "Виджеты",
