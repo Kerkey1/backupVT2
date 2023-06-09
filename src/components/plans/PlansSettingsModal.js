@@ -30,13 +30,15 @@ const PlansSettingsModal = observer(({open, setOpen, machineId}) => {
                 copies: 1,
             })
         }
+
+        if (!p) setRadio("everyday");
+        else {
+            if (p?.dayOfMonth) setRadio("everyMonth");
+            else if (p?.dayOfWeek) setRadio("everyWeek");
+            else setRadio("everyday");
+        }
     }, [machine])
 
-    useEffect(() => {
-        if (plan?.dayOfMonth !== undefined) setRadio("everyMonth");
-        else if (plan?.dayOfWeek !== undefined) setRadio("everyWeek");
-        else setRadio("everyday");
-    }, [plan])
 
     const onCancel = () => setOpen(!open)
     const savePlan = () => {

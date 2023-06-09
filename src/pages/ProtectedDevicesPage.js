@@ -21,6 +21,7 @@ import NotificationCardList from "../components/lists/NotificationCardList";
 import notificationStore from "../stores/NotificationStore";
 import {useNavigate} from "react-router";
 import {autorun} from "mobx";
+import PlansSettingsModal from "../components/plans/PlansSettingsModal";
 
 const ProtectedDevicesPage = observer(() => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const ProtectedDevicesPage = observer(() => {
     const [plan, setPlan] = useState()
     const [backups, setBackups] = useState()
     const [notifications, setNotification] = useState()
-
+    const [open, setOpen] = useState(false)
     const [machineName, setMachineName] = useState('')
     const [disabled, setDisabled] = useState(false)
     const [nextBackup, setNextBackup] = useState()
@@ -61,6 +62,7 @@ const ProtectedDevicesPage = observer(() => {
     }
 
     const viewAll = () => navigate("/notifications")
+    const handleOpenPlan = () => setOpen(true)
     const menu = [
         {
             key: "backupsList",
@@ -97,6 +99,7 @@ const ProtectedDevicesPage = observer(() => {
                 <DrawerSubHeader
                     text={nextBackup ? `Следующий бэкап: ${nextBackup}` : "План не задан"}
                     action={<><SettingOutlined/> Настроить план</>}
+                    onActionClick={handleOpenPlan}
                 />
                 <PlanCard plan={plan}/>
             </>
@@ -115,6 +118,7 @@ const ProtectedDevicesPage = observer(() => {
             visible={machineId}
             title={(currentItem) => title(currentItem)}
             menu={menu} onClose={onClose}/>
+        <PlansSettingsModal machineId={machineId} open={open} setOpen={setOpen}/>
     </>
 
 })
